@@ -1,0 +1,11 @@
+; --------------------------------------------
+; Title:   Main
+; Author:  Batch-Man
+; Date:    30/09/2012
+; Version: 1.0
+; --------------------------------------------
+
+:begin
+jsr HWInit
+set i, 0x00
+set PC, noiseloop

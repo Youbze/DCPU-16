@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<solution>
+  <name>Test</name>
+  <properties>
+    <property name="emuLoad.projectName">Test</property>
+    <property name="emuLoadMode">project</property>
+  </properties>
+  <projects>
+    <project path="Test\Test.10cproj" />
+    <project path="Include\Include.10cproj" />
+  </projects>
+</solution>
