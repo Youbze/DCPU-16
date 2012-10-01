@@ -1,0 +1,45 @@
+; --------------------------------------------
+; Title:   Hardware
+; Author:  Batch-Man
+; Date:    01/10/2012
+; Version: 1.1
+; --------------------------------------------
+sub PC, 1 ; AntiExec Guard protects this area from contiguous access ;)
+
+:HWInit
+:detect_devs
+hwn i               ; Retrieve number of devices
+set j, 0            ; Initialize loop counter
+ife i, 0
+	set PC, POP
+
+:init_devs
+hwq j               
+ife a, 0xf615					;LEM1802
+  ife b, 0x7349
+  	ife c, 0x1802
+  		jsr init_lem1802
+
+add j, 1
+ifn j, i
+	set PC, init_devs
+set PC, POP
+
+:init_lem1802
+set [screen], j
+
+set a, 0           ; Device action, set VRAM address
+Set b, 0x8000      ; VRAM address
+hwi j
+
+; Cls
+set a, 0x8000
+:cls_loop
+set [a], 0x0000
+add a, 1
+ifn a, 0x80FF
+  set PC, cls_loop
+set PC, POP
+
+:screen
+dat 0x0000

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project version="1.7.5" type="code">
+  <name>Test</name>
+  <properties>
+    <property name="code.generateBinaryOutput">true</property>
+    <property name="code.binaryOutputFilename">Test.bin</property>
+    <property name="code.generateHexOutput">false</property>
+    <property name="code.hexOutputFilename">Test.hex</property>
+    <property name="code.setFirstFile">False</property>
+    <property name="code.firstFile">Main.10c</property>
+  </properties>
+  <references>
+    <project>Include</project>
+  </references>
+  <files>
+    <file path="Main.10c" />
+    <file path="Noise.10c" />
+    <file path="Data.10c">
+      <property name="providerFileTypeName">DevKit 10c Assembly File</property>
+    </file>
+  </files>
+</project>

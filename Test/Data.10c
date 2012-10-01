@@ -1,0 +1,7 @@
+; --------------------------------------------
+; Title:   Data
+; Author:  Batch-Man
+; Date:    01/10/2012
+; Version: 1.0
+; --------------------------------------------
+sub PC, 1 ; AntiExec Guard protects this area from contiguous access ;)

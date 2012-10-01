@@ -1,0 +1,15 @@
+; --------------------------------------------
+; Title:   Noise
+; Author:  Batch-Man
+; Date:    30/09/2012
+; Version: 1.1
+; --------------------------------------------
+sub PC, 1 ; AntiExec Guard protects this area from contiguous access ;)
+
+:noiseloop
+add i, 1
+ife i, 0x400
+	set i, 0x00
+jsr rand
+set [0x8000+i], a
+set PC, noiseloop
