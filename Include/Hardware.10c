@@ -2,7 +2,7 @@
 ; Title:   Hardware
 ; Author:  Batch-Man
 ; Date:    01/10/2012
-; Version: 1.1
+; Version: 1.2.1
 ; --------------------------------------------
 sub PC, 1 ; AntiExec Guard protects this area from contiguous access ;)
 
@@ -19,6 +19,10 @@ ife a, 0xf615					;LEM1802
   ife b, 0x7349
   	ife c, 0x1802
   		jsr init_lem1802
+ife a, 0x7406
+	ife b, 0x30cf
+		ife c, 0x0001
+			jsr init_keyb
 
 add j, 1
 ifn j, i
@@ -26,10 +30,10 @@ ifn j, i
 set PC, POP
 
 :init_lem1802
-set [screen], j
+set [screen_d], j
 
-set a, 0           ; Device action, set VRAM address
-Set b, 0x8000      ; VRAM address
+set a, 0         	  ; Device action, set VRAM address
+Set b, [screen_a]
 hwi j
 
 ; Cls
@@ -37,9 +41,21 @@ set a, 0x8000
 :cls_loop
 set [a], 0x0000
 add a, 1
-ifn a, 0x80FF
+ifn a, 0x8100
   set PC, cls_loop
 set PC, POP
 
-:screen
+:init_keyb
+set [keyb_d], j
+set a, 3
+set b, 0
+hwi j			; Disabling keyboard, don't know how to properly use it :p
+set PC, POP
+
+
+:screen_d		; Screen dev ID
+dat 0x0000
+:screen_a		; VRAM pointer (/!\should be modified BEFORE HWInit call if needed but NEVER AFTER/!\)
+dat 0x8000
+:keyb_d			; Keyboard dev ID
 dat 0x0000
