@@ -1,0 +1,17 @@
+; --------------------------------------------
+; Title:   keyboard
+; Author:  Nivtitif
+; Date:    02/10/2012
+; Version: 
+; --------------------------------------------
+sub PC, 1 ; AntiExec Guard protects this area from contiguous access ;)
+
+:init_keyboard
+set [keyboard_id], j
+set a, 3
+set b, 0
+hwi j			; Disabling keyboard, we have to define it's suitable behaviour before
+set PC, POP
+
+:keyboard_id
+dat 0x0000

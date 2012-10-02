@@ -15,5 +15,7 @@
     <file path="Hardware.10c" />
     <file path="Interrupt.10c" />
     <file path="lem1802.10c" />
+    <file path="keyboard.10c" />
+    <file path="clock.10c" />
   </files>
 </project>
