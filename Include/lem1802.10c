@@ -1,0 +1,30 @@
+; --------------------------------------------
+; Title:   lem1802
+; Author:  Nivtitif
+; Date:    02/10/2012
+; Version: 
+; --------------------------------------------
+sub PC, 1 ; AntiExec Guard protects this area from contiguous access ;)
+
+:init_lem1802
+set [screen_id], j
+set a, 0         	  ; Device action, set VRAM address
+Set b, [screen_addr]
+hwi j
+
+; Clear screen
+set a, [screen_addr]
+set b,a
+add b,0x0100
+:cls_loop
+set [a], 0x0000
+add a, 1
+ifn a, b
+  set PC, cls_loop
+set PC, POP
+
+
+:screen_id		; Screen dev ID
+dat 0x0000
+:screen_addr		; VRAM pointer (/!\should be modified BEFORE HWInit call if needed but NEVER AFTER/!\)
+dat 0x8000

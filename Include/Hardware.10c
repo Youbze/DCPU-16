@@ -7,13 +7,13 @@
 sub PC, 1 ; AntiExec Guard protects this area from contiguous access ;)
 
 :HWInit
-:detect_devs
+:detect_devices
 hwn i               ; Retrieve number of devices
 set j, 0            ; Initialize loop counter
 ife i, 0
 	set PC, POP
 
-:init_devs
+:init_devices
 hwq j               
 ife a, 0xf615					;LEM1802
   ife b, 0x7349
@@ -22,41 +22,20 @@ ife a, 0xf615					;LEM1802
 ife a, 0x7406
 	ife b, 0x30cf
 		ife c, 0x0001
-			jsr init_keyb
+			jsr init_keyboard
 
 add j, 1
 ifn j, i
-	set PC, init_devs
+	set PC, init_devices
 ias ISR
 set PC, POP
 
-:init_lem1802
-set [screen_d], j
-
-set a, 0         	  ; Device action, set VRAM address
-Set b, [screen_a]
-hwi j
-
-; Cls
-set a, 0x8000
-:cls_loop
-set [a], 0x0000
-add a, 1
-ifn a, 0x8100
-  set PC, cls_loop
-set PC, POP
-
-:init_keyb
-set [keyb_d], j
+:init_keyboard
+set [keyboard_id], j
 set a, 3
 set b, 0
 hwi j			; Disabling keyboard, we have to define it's suitable behaviour before
 set PC, POP
 
-
-:screen_d		; Screen dev ID
-dat 0x0000
-:screen_a		; VRAM pointer (/!\should be modified BEFORE HWInit call if needed but NEVER AFTER/!\)
-dat 0x8000
-:keyb_d			; Keyboard dev ID
+:keyboard_id
 dat 0x0000

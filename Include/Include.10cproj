@@ -14,5 +14,6 @@
     <file path="Stdlib.10c" />
     <file path="Hardware.10c" />
     <file path="Interrupt.10c" />
+    <file path="lem1802.10c" />
   </files>
 </project>

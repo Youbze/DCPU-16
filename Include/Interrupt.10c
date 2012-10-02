@@ -7,7 +7,7 @@
 sub PC, 1 ; AntiExec Guard protects this area from contiguous access ;)
 
 :ISR
-ife a, [keyb_d]
+ife a, [keyboard_id]
 	set PC, PC ;nop (insert keyboard interrupt code here)
 	;
 	;
