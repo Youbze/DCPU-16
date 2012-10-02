@@ -13,7 +13,6 @@ ife a, [keyb_d]
 	;
 	;
 ;other interrupts...
-;
-;
-;
+ife a, [clock_d]
+	set PC, PC ;nop (insert clock interrupt code here)
 rfi 0

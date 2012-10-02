@@ -23,6 +23,10 @@ ife a, 0x7406
 	ife b, 0x30cf
 		ife c, 0x0001
 			jsr init_keyb
+ife a, 0xb402
+	ife b, 0x12d0
+		ife c, 0x0001
+			jsr init_clock
 
 add j, 1
 ifn j, i
@@ -34,15 +38,18 @@ set PC, POP
 set [screen_d], j
 
 set a, 0         	  ; Device action, set VRAM address
-Set b, [screen_a]
+set b, [screen_a]
 hwi j
 
 ; Cls
-set a, 0x8000
+set a, [screen_a]
+set b, a
+add b, 0x100
 :cls_loop
 set [a], 0x0000
 add a, 1
-ifn a, 0x8100
+
+ifn a, b
   set PC, cls_loop
 set PC, POP
 
@@ -53,10 +60,21 @@ set b, 0
 hwi j			; Disabling keyboard, we have to define it's suitable behaviour before
 set PC, POP
 
+:init_clock
+set [clock_d], j
+set a, 0
+set b, 1
+hwi j
+set a, 2
+set b, j
+hwi j
+set PC, POP
 
 :screen_d		; Screen dev ID
 dat 0x0000
 :screen_a		; VRAM pointer (/!\should be modified BEFORE HWInit call if needed but NEVER AFTER/!\)
 dat 0x8000
 :keyb_d			; Keyboard dev ID
+dat 0x0000
+:clock_d		; Clock dev ID
 dat 0x0000
