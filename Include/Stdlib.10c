@@ -6,5 +6,32 @@
 ; --------------------------------------------
 sub PC, 1 ; AntiExec Guard protects this area from contiguous access ;)
 
+:PCSave
+dat 0x0000
+
 :HALT			; Halts the execution
 sub PC, 1
+
+:CSave			; Saves the context on the stack
+set [PCSave], POP
+set PUSH, a
+set PUSH, b
+set PUSH, c
+set PUSH, x
+set PUSH, y
+set PUSH, z
+set PUSH, i
+set PUSH, j
+set PC, [PCSave]
+
+:CLoad			; Loads a previously saved context from the stack
+set [PCSave], POP
+set j, POP
+set i, POP
+set z, POP
+set y, POP
+set x, POP
+set c, POP
+set b, POP
+set a, POP
+set PC, [PCSave]
