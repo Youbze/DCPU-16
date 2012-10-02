@@ -13,5 +13,6 @@
     <file path="Rand.10c" />
     <file path="Stdlib.10c" />
     <file path="Hardware.10c" />
+    <file path="Interrupt.10c" />
   </files>
 </project>

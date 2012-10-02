@@ -27,6 +27,7 @@ ife a, 0x7406
 add j, 1
 ifn j, i
 	set PC, init_devs
+ias ISR
 set PC, POP
 
 :init_lem1802
@@ -49,7 +50,7 @@ set PC, POP
 set [keyb_d], j
 set a, 3
 set b, 0
-hwi j			; Disabling keyboard, don't know how to properly use it :p
+hwi j			; Disabling keyboard, we have to define it's suitable behaviour before
 set PC, POP
 
 

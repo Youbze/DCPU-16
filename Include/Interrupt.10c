@@ -1,0 +1,19 @@
+; --------------------------------------------
+; Title:   Interrupt
+; Author:  Batch-Man
+; Date:    02/10/2012
+; Version: 1.0
+; --------------------------------------------
+sub PC, 1 ; AntiExec Guard protects this area from contiguous access ;)
+
+:ISR
+ife a, [keyb_d]
+	set PC, PC ;nop (insert keyboard interrupt code here)
+	;
+	;
+	;
+;other interrupts...
+;
+;
+;
+rfi 0
