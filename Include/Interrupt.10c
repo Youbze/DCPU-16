@@ -13,7 +13,6 @@ ife a, [keyboard_id]
 	;
 	;
 ;other interrupts...
-;
-;
-;
+ife a, [clock_id]
+	set PC, PC ;nop (insert clock interrupt code here)
 rfi 0
